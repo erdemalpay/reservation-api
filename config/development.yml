@@ -1,0 +1,6 @@
+jwt:
+  secret: 'topSecret123'
+db:
+  database: 'reservation-api'
+server:
+  origin: http://localhost:8080

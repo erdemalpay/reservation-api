@@ -1,0 +1,8 @@
+jwt:
+  secret: 'topSecret123'
+server:
+  origin: ''
+db:
+  host: localhost
+  port: 27017
+  database: 'reservation-api'

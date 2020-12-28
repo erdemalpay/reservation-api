@@ -1,0 +1,6 @@
+server:
+  port: 8000
+
+db:
+  host: 'localhost'
+  port: 27027
