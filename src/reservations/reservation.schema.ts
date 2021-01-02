@@ -24,3 +24,7 @@ export class Reservation extends Document {
 
 export const ReservationSchema = SchemaFactory.createForClass(Reservation);
 ReservationSchema.index({ userId: 1, tableId: 1 });
+ReservationSchema.index(
+  { userId: 1, tableId: 1, date: 1, hour: 1 },
+  { unique: true },
+);

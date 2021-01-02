@@ -25,8 +25,16 @@ export class ReservationRepository {
   async getAllByUserAndTableId(
     userId: number,
     tableId: number,
+    date: string,
   ): Promise<Reservation[]> {
+    if (date) {
+      return this.reservationModel.find({ userId, tableId, date });
+    }
     return this.reservationModel.find({ userId, tableId });
+  }
+
+  async getAllByUserId(userId: number): Promise<Reservation[]> {
+    return this.reservationModel.find({ userId });
   }
 
   async create(
@@ -45,7 +53,7 @@ export class ReservationRepository {
       if (error.code === 11000) {
         // duplicate item
         throw new ConflictException(
-          `Reservation with tableId ${tableId} and userId ${userId} already exists`,
+          `This table is already reserved for this time.`,
         );
       }
       throw error;

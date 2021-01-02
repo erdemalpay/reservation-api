@@ -8,6 +8,7 @@ import {
   Body,
   Delete,
   Param,
+  Query,
 } from '@nestjs/common';
 import { Reservation } from './reservation.schema';
 import { ReservationService } from './reservation.service';
@@ -21,16 +22,28 @@ export class TableController {
   constructor(private reservationService: ReservationService) {}
 
   @UseGuards(AuthGuard())
+  @Get('/all')
+  getAllReservations(
+    @GetUser()
+    user: User,
+  ): Promise<Reservation[]> {
+    return this.reservationService.getReservationsByUserId(user.id);
+  }
+
+  @UseGuards(AuthGuard())
   @Get('/:table')
   getReservations(
     @GetUser()
     user: User,
     @Param('table')
     tableId: number,
+    @Query('date')
+    date: string,
   ): Promise<Reservation[]> {
     return this.reservationService.getReservationsByUserAndTable(
       user.id,
       tableId,
+      date,
     );
   }
 

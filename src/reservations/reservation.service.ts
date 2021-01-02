@@ -10,8 +10,17 @@ export class ReservationService {
   async getReservationsByUserAndTable(
     userId: number,
     tableId: number,
+    date: string,
   ): Promise<Reservation[]> {
-    return this.reservationRepository.getAllByUserAndTableId(userId, tableId);
+    return this.reservationRepository.getAllByUserAndTableId(
+      userId,
+      tableId,
+      date,
+    );
+  }
+
+  async getReservationsByUserId(userId: number): Promise<Reservation[]> {
+    return this.reservationRepository.getAllByUserId(userId);
   }
 
   async createReservation(
