@@ -1,6 +1,6 @@
 jwt:
   secret: 'topSecret123'
 server:
-  origin: http://localhost:3500
+  origin: https://erdem-reservation-app.herokuapp.com
 db:
   url: mongodb+srv://erdem:erdem@cluster0.tfntb.mongodb.net/reservation-api?retryWrites=true&w=majority
