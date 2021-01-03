@@ -14,12 +14,9 @@ async function bootstrap() {
   const serverConfig = config.get('server');
   logger.log(process.env.NODE_ENV);
   logger.log(`Server Config: ${JSON.stringify(serverConfig)}`);
-  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
-    console.log('DEV');
     app.enableCors();
   } else {
-    console.log('PROD');
     app.enableCors({ origin: serverConfig.origin });
     logger.log(`Accepting requests from origin ${serverConfig.origin}`);
   }

@@ -1,8 +1,6 @@
 jwt:
-  secret: 'topSecret123'
+  secret: "topSecret123"
 server:
-  origin: ''
+  origin: http://localhost:3500
 db:
-  host: localhost
-  port: 27017
-  database: 'reservation-api'
+  url: mongodb+srv://erdem:erdem@cluster0.tfntb.mongodb.net/reservation-api?retryWrites=true&w=majority
