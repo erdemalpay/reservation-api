@@ -41,9 +41,9 @@ export class TableRepository {
     }
   }
 
-  async update(tableDto: TableDto): Promise<Table> {
+  async update(userId: number, tableDto: TableDto): Promise<Table> {
     const table = await this.tableModel.findOneAndUpdate(
-      { id: tableDto.id },
+      { userId, id: tableDto.id },
       tableDto,
       {
         new: true,
@@ -57,8 +57,8 @@ export class TableRepository {
     return purify(table);
   }
 
-  async delete(id: number): Promise<number> {
-    await this.tableModel.findOneAndDelete({ id });
+  async delete(userId: number, id: number): Promise<number> {
+    await this.tableModel.findOneAndDelete({ userId, id });
     return id;
   }
 }

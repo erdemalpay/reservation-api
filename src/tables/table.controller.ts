@@ -29,7 +29,8 @@ export class TableController {
   @UseGuards(AuthGuard())
   @Post()
   createTable(
-    @GetUser() user: User,
+    @GetUser()
+    user: User,
     @Body(ValidationPipe) table: TableDto,
   ): Promise<Table> {
     return this.tableService.createTable(user.id, table);
@@ -37,13 +38,23 @@ export class TableController {
 
   @UseGuards(AuthGuard())
   @Put()
-  updateTable(@Body(ValidationPipe) table: TableDto): Promise<Table> {
-    return this.tableService.updateTable(table);
+  updateTable(
+    @GetUser()
+    user: User,
+    @Body(ValidationPipe)
+    table: TableDto,
+  ): Promise<Table> {
+    return this.tableService.updateTable(user.id, table);
   }
 
   @UseGuards(AuthGuard())
   @Delete('/:id')
-  deleteTable(@Param('id') id: number): Promise<number> {
-    return this.tableService.deleteTable(id);
+  deleteTable(
+    @GetUser()
+    user: User,
+    @Param('id')
+    id: number,
+  ): Promise<number> {
+    return this.tableService.deleteTable(user.id, id);
   }
 }

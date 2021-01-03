@@ -15,11 +15,11 @@ export class TableService {
     return this.tableRepository.create(userId, table);
   }
 
-  async updateTable(table: TableDto): Promise<Table> {
-    return this.tableRepository.update(table);
+  async updateTable(userId: number, table: TableDto): Promise<Table> {
+    return this.tableRepository.update(userId, table);
   }
 
-  async deleteTable(id: number): Promise<number> {
-    return this.tableRepository.delete(id);
+  async deleteTable(userId: number, id: number): Promise<number> {
+    return this.tableRepository.delete(userId, id);
   }
 }
