@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Table extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   id: number;
 
   @Prop({ required: true })
@@ -18,3 +18,4 @@ export class Table extends Document {
 
 export const TableSchema = SchemaFactory.createForClass(Table);
 TableSchema.index({ userId: 1 });
+TableSchema.index({ userId: 1, id: 1 }, { unique: true });
