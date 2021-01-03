@@ -1,5 +1,5 @@
 jwt:
-  secret: "topSecret123"
+  secret: 'topSecret123'
 server:
   origin: http://localhost:3500
 db:
