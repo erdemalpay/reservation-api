@@ -64,17 +64,26 @@ export class ReservationRepository {
     id: number,
     reservationDto: ReservationDto,
   ): Promise<Reservation> {
-    const reservation = await this.reservationModel.findOneAndUpdate(
-      { id },
-      reservationDto,
-      {
-        new: true,
-      },
-    );
-    if (!reservation) {
-      throw new NotFoundException(`Reservation with id ${id} does not exist`);
+    try {
+      const reservation = await this.reservationModel.findOneAndUpdate(
+        { id },
+        reservationDto,
+        {
+          new: true,
+        },
+      );
+      if (!reservation) {
+        throw new NotFoundException(`Reservation with id ${id} does not exist`);
+      }
+      return purify(reservation);
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new ConflictException(
+          `This table is already reserved for this time.`,
+        );
+      }
+      throw error;
     }
-    return purify(reservation);
   }
 
   async delete(id: number): Promise<number> {
